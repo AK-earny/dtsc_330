@@ -4,6 +4,7 @@ functions share the same data, which suggests we should use:
 """
 import numpy as np
 import sklearn
+from xgboost import XGBClassifier
 
 # NOTE: We can use a custom classifier, but most classiifers are 
 # implemented well.
@@ -12,7 +13,7 @@ import sklearn
 
 
 class ReusableClassifier:
-    def __init__(self, model_type: str = 'logistic_regression'):
+    def __init__(self, model_type: str = 'random_forest'):
         # self has to be passed within classes, it gives us access to shared variables
         # model_type is the argument
         # : str is type hinting, which shows that the input MUST be a string
@@ -22,19 +23,20 @@ class ReusableClassifier:
 
         Args:
             model_type (str, optional): model type can be either 
-                logistic_regression or random_forest. Defaults to 
-                'logistic_regression'.
+                logistic_regression or random_forest or xgboost. Defaults to 
+                'random_forest'.
         """
-        self.model = None
         self.model_type = model_type
+        self.model = None
         self.scaler = None
 
     def train(self, features, labels):
         if self.model_type == 'logistic_regression':
             self.model = sklearn.linear_model.LogisticRegression()
-        if self.model_type == 'random_forest':
+        elif self.model_type == 'random_forest':
             self.model = sklearn.ensemble.RandomForestClassifier()
-
+        elif self.model_type == "xgboost":
+            self.model = XGBClassifier()
         # We NEED to scale the data for regression
         # we can use a StandardScaler to make it normal
         # or we can use a MinMaxScaler to make it 0-1
@@ -77,6 +79,7 @@ class ReusableClassifier:
     def load(self, path: str):
         """Load in a model from a path."""
         pass
+
 
 
 
