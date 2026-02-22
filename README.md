@@ -8,3 +8,6 @@ I hadn't waied so long.
 
 HW #4 
 XGBoost achieved an accuracy of 0.84, while random forest acheived a 0.78, meaning performance of the model by approximately 6 percentage points.
+
+HW #5 
+I would probably ignore names since they are a little unreliable, meaning I would merge phonebook 1 and phonebook 2 on phone number and address. This would require an inner join merge so that you only compare records that match on those keys in both phone books.
