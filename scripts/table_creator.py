@@ -1,7 +1,6 @@
 import sqlite3
 from dtsc330_26.readers.articles import Articles
 from dtsc330_26.readers.grants import Grants
-import os
 
 def minimal_create_database():
     """The bare minimum to create a new sqlite database."""
@@ -15,4 +14,3 @@ if __name__ == "__main__":
 
     grants = Grants("C:/Users/alexk/Downloads/RePORTER_PRJ_C_FY2025.zip")
     grants.to_db()
-    print(os.path.abspath("data/article_grant_db.sqlite"))
