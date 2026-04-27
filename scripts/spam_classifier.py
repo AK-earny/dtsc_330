@@ -19,11 +19,10 @@ df = pd.read_csv("spam_data/spam_email_dataset.csv")
 
 df = df.drop(columns=["email_id", "subject", "email_text", "sender_email"])
 
-df = pd.get_dummies(df, columns=["sender_domain", "email_day_of_week"], drop_first=True)
+df = pd.get_dummies(df, columns=["sender_domain", "email_day_of_week"], drop_first=True) ## added with ai assistence
 
 features = df.drop(columns=["label"])
 labels = df["label"]
-
 
 features, test_features, labels, test_labels = train_test_split(features, labels) ## added with ai assistence
 
@@ -35,7 +34,10 @@ pred_labels = classifier.predict(test_features)
 
 count_equal = (pred_labels.astype(int) == test_labels.to_numpy().astype(int)).sum()
 print(count_equal / len(test_labels))
+
 """
 When run with XGBoost the model seems to be 100% accurate
-When run with a less powerful model like a random forest, seems to be close to 100"
+When run with a less powerful model like a random forest, seems to be close to 100. (97.5 to 99.5)
+
+Seems like the data is easy to be learned. Either that or I messed up somewhere.
 """
